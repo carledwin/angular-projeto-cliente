@@ -12,16 +12,13 @@ import { ClienteFormComponent } from './../cliente-form/cliente-form.component';
 export class ClienteComponent implements OnInit {
 
   clientes: Cliente[] = [];
+  
 
   constructor(private ngbModal: NgbModal,
               private clienteService: ClienteService) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.mostrarClientes();
-  }
-
-  checkedCasado(index: any) {
-    
   }
 
   mostrarClientes() {
@@ -49,18 +46,41 @@ export class ClienteComponent implements OnInit {
           });
   }
 
+  checkedCasado(index: number) {
+
+    const item: Cliente = this.clientes[index];
+
+    const objeto = {casado: !item.casado};
+
+    this.clienteService.editarClienteParcial(item.id, objeto);
+  }
+
   addCliente() {
     const modal = this.ngbModal.open(ClienteFormComponent);
     modal.result.then(this.handleModalClienteFormComponent.bind(this),
                       this.handleModalClienteFormComponent.bind(this));
   }
 
-  handleModalClienteFormComponent(response: any): any {
-    alert('Janela fechada');
+  handleModalClienteFormComponent(response) {
+    
+    if(response === Object(response)){
+      if(response.modoInsercao){
+        response.cliente.id = response.id;
+        this.clientes.unshift(response.cliente);
+      }
+    }else{
+      let index = this.clientes.findIndex(value => value.id == response.id);
+      this.clientes[index] = response.cliente;
+    }
   }
 
-  EditarCliente(){
-    alert('Editar');
+  EditarCliente(cliente: Cliente){
+    
+    const modal = this.ngbModal.open(ClienteFormComponent);
+    modal.result.then(this.handleModalClienteFormComponent.bind(this),
+                      this.handleModalClienteFormComponent.bind(this));
+    modal.componentInstance.modoInsercao = false;
+    modal.componentInstance.cliente = cliente;
   }
 
   DeletarCliente(){

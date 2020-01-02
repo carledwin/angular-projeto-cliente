@@ -16,7 +16,7 @@
     </thead>
     <tbody>
         <tr *ngFor ="let cliente of clientes, let index = index">
-            <td [ngClass]="{'casado': cliente.casado, 'nao-casado': !cliente.casado}">
+            <td [ngClass]="{'casado': cliente.casado}">
                 {{cliente.nome}}
             </td>
             <td>

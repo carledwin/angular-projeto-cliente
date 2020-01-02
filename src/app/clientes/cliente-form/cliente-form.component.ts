@@ -13,6 +13,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ClienteFormComponent implements OnInit {
 
   clienteForm: FormGroup;
+  cliente: Cliente;
+  modoInsercao: boolean = true;
 
   constructor(private formBuilder: FormBuilder,
               public ngbActiveModal: NgbActiveModal,
@@ -24,7 +26,17 @@ export class ClienteFormComponent implements OnInit {
       endereco: ['', [Validators.required]],
       casado: false
     });
+
+
+    if(!this.modoInsercao){
+      this.carregarTudo(this.cliente);
+    }
   }
+
+  carregarTudo(cliente: Cliente){
+    this.clienteForm.patchValue(cliente);
+  }
+
 
   salvarCliente(){
 
