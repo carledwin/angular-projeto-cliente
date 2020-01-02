@@ -1,0 +1,38 @@
+criar o projeto
+ng new angular-projeto
+
+instalar firebase, font-awesome e bootstrap
+npm install firebase @angular/fire font-awesome bootstrap @ng-bootstrap/ng-bootstrap --save 
+
+Criar um projeto no firebase
+criar um app da web no firebase
+
+recuperar informações do cdn
+
+ var firebaseConfig = {
+    apiKey: "AIzaSyA4Q0-9nk-XQLAkJ5_F4q6G7mAhJat3L7I",
+    authDomain: "angular-1f93c.firebaseapp.com",
+    databaseURL: "https://angular-1f93c.firebaseio.com",
+    projectId: "angular-1f93c",
+    storageBucket: "angular-1f93c.appspot.com",
+    messagingSenderId: "302850100330",
+    appId: "1:302850100330:web:173807624dbecad1710e13",
+    measurementId: "G-2CMV5HSF2T"
+  };
+
+  configurar a variavel firebase no environment
+
+declarar o AngularFireModule no app.module unto com as outras configurações
+
+em angular.json vamos configurar o "style": [] para incluir o bootstrap.min.css
+
+criar um novo component 
+ng generate component clientes/cliente
+
+criar o component para modal
+ng generate component clientes/cliente-form
+
+Sempre que quiser exibir um component modal o mesmo deve estar declarado no entryComponent do modulo
+
+criar interface
+ng generate interface clientes/models/cliente
