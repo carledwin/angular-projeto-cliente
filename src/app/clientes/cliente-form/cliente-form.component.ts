@@ -1,9 +1,9 @@
 import { DocumentReference } from '@angular/fire/firestore';
 import { ClienteService } from './../../services/cliente.service';
-import { Cliente } from './../models/cliente';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Cliente } from './../models/cliente';
 
 @Component({
   selector: 'app-cliente-form',

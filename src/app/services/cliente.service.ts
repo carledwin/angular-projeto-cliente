@@ -1,7 +1,6 @@
-import { Cliente } from './../clientes/models/cliente';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { ClienteViewModel } from '../clientes/viewModels/clienteViewModel';
+import { Cliente } from './../clientes/models/cliente';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,15 +14,14 @@ export class ClienteService {
 
   getClientes(): Observable<firebase.firestore.QuerySnapshot> {
 
-    return this.angularFirestore.collection<Cliente>(
-      this.clienteColection, ref => ref.orderBy('nome', 'asc'))
-      .get();
+    //queryFn: QueryFn
+    return this.angularFirestore.collection<Cliente>('clientes').get();
   }
 
   salvarCliente(cliente: Cliente): Promise<DocumentReference> {
 
     return this.angularFirestore
-                .collection(this.clienteColection)
+                .collection<ClienteViewModel>(this.clienteColection)
                 .add(cliente);
   }
 
