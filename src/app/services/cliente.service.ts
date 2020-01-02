@@ -21,15 +21,15 @@ export class ClienteService {
   salvarCliente(cliente: Cliente): Promise<DocumentReference> {
 
     return this.angularFirestore
-                .collection<ClienteViewModel>(this.clienteColection)
+                .collection<Cliente>(this.clienteColection)
                 .add(cliente);
   }
 
-  editarCliente(clienteViewModel: ClienteViewModel): Promise<void> {
+  editarCliente(cliente: Cliente): Promise<void> {
 
     return this.angularFirestore
                 .collection(this.clienteColection)
-                .doc(clienteViewModel.id).update(clienteViewModel);
+                .doc(cliente.id).update(cliente);
   }
 
   editarClienteParcial(id: string, object: Object): Promise<void> {
