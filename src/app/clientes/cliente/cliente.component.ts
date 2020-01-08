@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteService } from './../../services/cliente.service';
 import { Cliente } from './../models/cliente';
 import { ClienteFormComponent } from './../cliente-form/cliente-form.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cliente',
@@ -17,8 +18,10 @@ export class ClienteComponent implements OnInit {
   constructor(private ngbModal: NgbModal,
               private clienteService: ClienteService) { }
 
-  ngOnInit() { 
-    this.mostrarClientes();
+  ngOnInit() {
+    this.mostrarClientes();;
+    //this.clientes = 
+    //this.clienteService.getClientes();
   }
 
   mostrarClientes() {
@@ -28,20 +31,24 @@ export class ClienteComponent implements OnInit {
 
               this.clientes = [];
 
-              response.docs.forEach(value => {
-                                      const data = value.data();
-                                      const id = data.id;
-                                      const cliente: Cliente = {
-                                        id: id,
-                                        nome: data.nome,
-                                        endereco: data.endereco,
-                                        casado: data.casado,
-                                        dataCadastro: data.dataCadastro ? data.dataCadastro.toDate() : null,
-                                        dataAtualizacao: data.dataAtualizacao ? data.dataAtualizacao.toDate() : null
-                                      }
+              this.clientes = response;
 
-                                      this.clientes.push(cliente);           
-                                    });
+              // response.docs.forEach(value => {
+              //                         const data = value.data();
+              //                         const id = data.id;
+              //                         const cliente: Cliente = {
+              //                           id: data.id,
+              //                           nome: data.nome,
+              //                           endereco: data.endereco,
+              //                           casado: data.casado,
+              //                           dataCadastro: data.dataCadastro ? data.dataCadastro.toDate() : null,
+              //                           dataAtualizacao: data.dataAtualizacao ? data.dataAtualizacao.toDate() : null
+              //                         }
+
+              //                         console.log('data: ' + JSON.stringify(data));
+              //                         console.log('cliente: ' + JSON.stringify(cliente));
+              //                         this.clientes.push(cliente);           
+              //                       });
 
           });
   }
@@ -66,16 +73,19 @@ export class ClienteComponent implements OnInit {
     if(response === Object(response)){
       if(response.modoInsercao){
         response.cliente.id = response.id;
-        this.clientes.unshift(response.cliente);
+        //this.clientes.unshift(response.cliente);
       }
     }else{
-      let index = this.clientes.findIndex(value => value.id == response.id);
-      this.clientes[index] = response.cliente;
+      // let index = this.clientes.findIndex(value => value.id == response.id);
+      // this.clientes[index] = response.cliente;
     }
   }
 
-  EditarCliente(cliente: Cliente){
+  EditarCliente(id: string, cliente: Cliente){
     
+    console.log('id: ' + id);
+    console.log('cliente: ' + JSON.stringify(cliente));
+
     const modal = this.ngbModal.open(ClienteFormComponent);
     modal.result.then(this.handleModalClienteFormComponent.bind(this),
                       this.handleModalClienteFormComponent.bind(this));
@@ -83,7 +93,7 @@ export class ClienteComponent implements OnInit {
     modal.componentInstance.cliente = cliente;
   }
 
-  DeletarCliente(){
-    alert('Deletar');
+  DeletarCliente(id: string, index: number){
+    alert('Deletar id: ' + id + ', index: ' + index);
   }
 }

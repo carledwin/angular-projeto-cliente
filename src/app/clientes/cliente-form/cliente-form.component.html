@@ -10,6 +10,10 @@
 <div class="modal-body">
     <form [formGroup]="clienteForm" (ngSubmit)="salvarCliente()">
         <div class="form-group">
+            <label for="id">Código</label>
+            <input type="text" id="id" readonly placeholder="Código do cliente" class="form-control" formControlName="id">
+        </div>
+        <div class="form-group">
             <label for="nome">Nome*</label>
             <input type="text" id="nome" placeholder="Nome" class="form-control" formControlName="nome">
             <span style="color:red" *ngIf="clienteForm.controls['nome'].touched && clienteForm.controls['nome'].errors?.required">

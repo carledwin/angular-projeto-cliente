@@ -8,6 +8,7 @@
 <table class="table table-striped" *ngIf="clientes && clientes.length > 0">
     <thead>
         <tr>
+            <th>Código</th>
             <th>Nome</th>
             <th>Data Cadastro</th>
             <th>Casado</th>
@@ -16,17 +17,20 @@
     </thead>
     <tbody>
         <tr *ngFor ="let cliente of clientes, let index = index">
-            <td [ngClass]="{'casado': cliente.casado}">
+            <td>
+                {{cliente.id}}
+            </td>
+            <td>
                 {{cliente.nome}}
             </td>
             <td>
-                {{cliente.dataAtualizacao | date}}
+                {{cliente.dataAtualizacao}}
             </td>
             <td>
                 <input type="checkbox" [checked]="cliente.casado" (change)="checkedCasado(index)">
             </td>
             <td>
-                <button class="btn btn-primary" (click)="EditarCliente(cliente)">Editar</button>
+                <button class="btn btn-primary" (click)="EditarCliente(cliente.id, cliente)">Editar</button>
                 <button class="btn btn-danger" (click)="DeletarCliente(cliente.id, index)">Deletar</button>
             </td>
         </tr>

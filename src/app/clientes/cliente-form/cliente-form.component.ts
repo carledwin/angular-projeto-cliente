@@ -22,6 +22,9 @@ export class ClienteFormComponent implements OnInit {
 
   ngOnInit() {
     this.clienteForm = this.formBuilder.group({
+      id: ['', []],
+      dataAtualizacao: ['', []],
+      dataCriacao: [''],
       nome: ['', [Validators.required]],
       endereco: ['', [Validators.required]],
       casado: false
@@ -44,17 +47,40 @@ export class ClienteFormComponent implements OnInit {
       return;
     }
 
-    let cliente: Cliente = this.clienteForm.value;
-        cliente.dataCadastro = new Date();
-        cliente.dataAtualizacao = new Date();
+    if(this.modoInsercao) {
+
+      let cliente: Cliente = this.clienteForm.value;
+          cliente.dataCadastro = new Date();
+          cliente.dataAtualizacao = new Date();
     
-    this.clienteService.salvarCliente(cliente)
-          .then(response => this.handleSucessoSalvar(response, cliente))
-          .catch(err => console.error(err));
+      this.clienteService.salvarCliente(cliente)
+            .then(response => this.handleSucessoSalvar(response, cliente))
+            .catch(err => console.error(err));
+    }else {
+      
+      let cliente: Cliente = this.clienteForm.value;
+
+      console.log('clienteForm.value ->' + JSON.stringify(this.clienteForm.value));
+      console.log('this.cliente ->' + JSON.stringify(this.cliente));
+      console.log('cliente ->' + JSON.stringify(cliente));
+          cliente.id = this.cliente.id;
+          cliente.dataAtualizacao = new Date();
+    
+      // this.clienteService.editarCliente(cliente)
+      //       .then(response => this.handleSucessoEditar(cliente))
+      //       .catch(err => console.error(err));
+      
+    }
+
   }
 
   handleSucessoSalvar(response: DocumentReference, cliente: Cliente) {
 
     this.ngbActiveModal.dismiss({cliente: cliente, id: response.id, CreateMode: true});
+  }
+
+  handleSucessoEditar(cliente: Cliente) {
+
+    this.ngbActiveModal.dismiss({cliente: cliente, id: cliente.id, CreateMode: true});
   }
 }
