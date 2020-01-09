@@ -66,9 +66,9 @@ export class ClienteFormComponent implements OnInit {
           cliente.id = this.cliente.id;
           cliente.dataAtualizacao = new Date();
     
-      // this.clienteService.editarCliente(cliente)
-      //       .then(response => this.handleSucessoEditar(cliente))
-      //       .catch(err => console.error(err));
+      this.clienteService.editarCliente(cliente)
+            .then(response => this.handleSucessoEditar(cliente))
+            .catch(err => console.error(err));
       
     }
 
