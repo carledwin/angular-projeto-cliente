@@ -13,7 +13,6 @@ import { Observable } from 'rxjs';
 export class ClienteComponent implements OnInit {
 
   clientes: Cliente[] = [];
-  
 
   constructor(private ngbModal: NgbModal,
               private clienteService: ClienteService) { }
@@ -56,8 +55,6 @@ export class ClienteComponent implements OnInit {
   }
 
   EditarCliente(id: string, cliente: Cliente) {
-    console.log('id: ' + id);
-    console.log('cliente: ' + JSON.stringify(cliente));
     const modal = this.ngbModal.open(ClienteFormComponent);
     modal.result.then(this.handleModalClienteFormComponent.bind(this),
                       this.handleModalClienteFormComponent.bind(this));
@@ -66,6 +63,9 @@ export class ClienteComponent implements OnInit {
   }
 
   DeletarCliente(id: string, index: number){
-    alert('Deletar id: ' + id + ', index: ' + index);
+    this.clienteService
+        .deletarCliente(id)
+        .then(() => this.clientes.splice(index, 1));
+
   }
 }

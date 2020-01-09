@@ -52,9 +52,9 @@ export class ClienteService {
     return this.angularFirestoreCollectionClientes.doc(id).update(object);
   }
 
-  deletarCliente(id: string) {
+  deletarCliente(id: string): Promise<void> {
     this.angularFirestoreDocumentCliente = this._angularFirestore.doc<Cliente>(`${config.collection_endpoint}/${id}`);
-    this.angularFirestoreDocumentCliente.delete();
+    return this.angularFirestoreDocumentCliente.delete();
   }
 
 }
