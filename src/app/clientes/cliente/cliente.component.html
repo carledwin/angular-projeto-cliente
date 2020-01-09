@@ -20,7 +20,7 @@
             <td>
                 {{cliente.id}}
             </td>
-            <td>
+            <td [ngClass]="{'casado': cliente.casado, 'nao-casado': !cliente.casado}">
                 {{cliente.nome}}
             </td>
             <td>

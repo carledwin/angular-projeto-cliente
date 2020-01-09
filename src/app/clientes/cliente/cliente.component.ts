@@ -33,7 +33,7 @@ export class ClienteComponent implements OnInit {
 
   checkedCasado(index: number) {
     const item: Cliente = this.clientes[index];
-    const objeto = {casado: !item.casado};
+    const objeto = {casado: !item.casado, id: item.id};
     this.clienteService.editarClienteParcial(item.id, objeto);
   }
 
