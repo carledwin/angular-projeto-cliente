@@ -15,12 +15,16 @@ import { config } from './app.config';
 import { environment } from './../environments/environment';
 import { ClienteComponent } from './clientes/cliente/cliente.component';
 import { ClienteFormComponent } from './clientes/cliente-form/cliente-form.component';
+import { ProdutosComponent } from './produtos/produtos/produtos.component';
+import { MenuComponent } from './menu/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClienteComponent,
-    ClienteFormComponent
+    ClienteFormComponent,
+    MenuComponent,
+    ProdutosComponent
   ],
   imports: [
     BrowserModule,

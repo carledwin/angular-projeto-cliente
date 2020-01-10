@@ -36,3 +36,17 @@ Sempre que quiser exibir um component modal o mesmo deve estar declarado no entr
 
 criar interface
 ng generate interface clientes/models/cliente
+
+criar component menu 
+ng g c menu/menu
+
+criar component produtos
+ng g c produtos/produtos
+
+criar conta na azure
+
+fazer o build do projeto
+ng build
+
+app url azure
+https://sistemaclientescarledwinti.azurewebsites.net/

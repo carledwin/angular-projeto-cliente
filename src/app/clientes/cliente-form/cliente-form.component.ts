@@ -41,7 +41,7 @@ export class ClienteFormComponent implements OnInit {
   }
 
 
-  salvarCliente(){
+  salvarCliente() {
 
     if(this.clienteForm.invalid){
       return;
@@ -59,28 +59,23 @@ export class ClienteFormComponent implements OnInit {
     }else {
       
       let cliente: Cliente = this.clienteForm.value;
-
-      console.log('clienteForm.value ->' + JSON.stringify(this.clienteForm.value));
-      console.log('this.cliente ->' + JSON.stringify(this.cliente));
-      console.log('cliente ->' + JSON.stringify(cliente));
           cliente.id = this.cliente.id;
           cliente.dataAtualizacao = new Date();
     
       this.clienteService.editarCliente(cliente)
             .then(response => this.handleSucessoEditar(cliente))
             .catch(err => console.error(err));
-      
     }
 
   }
 
   handleSucessoSalvar(response: DocumentReference, cliente: Cliente) {
 
-    this.ngbActiveModal.dismiss({cliente: cliente, id: response.id, CreateMode: true});
+    this.ngbActiveModal.dismiss({cliente: cliente, id: response.id, modoInsercao: true});
   }
 
   handleSucessoEditar(cliente: Cliente) {
 
-    this.ngbActiveModal.dismiss({cliente: cliente, id: cliente.id, CreateMode: true});
+    this.ngbActiveModal.dismiss({cliente: cliente, id: cliente.id, modoInsercao: false});
   }
 }
